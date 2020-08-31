@@ -1,7 +1,7 @@
 # Ardalo Digital Platform Frontpage Service
 Provides the frontpage of the public part of the Ardalo Digital Platform.
 
-### Tech Stack
+## Tech Stack
 
 * Java 11
 * Gradle
@@ -9,3 +9,17 @@ Provides the frontpage of the public part of the Ardalo Digital Platform.
 * Spring MockMvc
 * Spock
 * Thymeleaf
+
+## Quick Start
+
+### Build application
+
+```bash
+./gradlew clean build
+```
+
+### Start application
+
+```bash
+./gradlew bootRun
+```
