@@ -12,14 +12,19 @@ Provides the frontpage of the public part of the Ardalo Digital Platform.
 
 ## Quick Start
 
-### Build application
-
-```bash
-./gradlew clean build
-```
-
-### Start application
-
-```bash
-./gradlew bootRun
-```
+* Start application
+    ```bash
+    ./gradlew bootRun
+    ```
+* Run tests
+    ```bash
+    ./gradlew clean test
+    ```
+* Generate Code Coverage Report. HTML Report can be found in `./build/reports/jacoco/test/html`
+    ```bash
+    ./gradlew check jacocoTestReport
+    ```
+* Build application JAR (and run tests)
+    ```bash
+    ./gradlew clean build
+    ```
