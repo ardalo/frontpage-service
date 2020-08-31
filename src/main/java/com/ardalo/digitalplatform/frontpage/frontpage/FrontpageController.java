@@ -1,4 +1,4 @@
-package com.ardalo.digitalplatform.frontpage;
+package com.ardalo.digitalplatform.frontpage.frontpage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
