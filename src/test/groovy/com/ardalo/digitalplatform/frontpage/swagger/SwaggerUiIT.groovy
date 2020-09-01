@@ -15,6 +15,15 @@ class SwaggerUiIT extends Specification {
   @Autowired
   MockMvc mockMvc
 
+  def "should provide Swagger UI"() {
+    when:
+    def result = mockMvc.perform(MockMvcRequestBuilders.get("/swagger-ui/index.html")).andReturn()
+
+    then:
+    result.response.status == 200
+    result.response.contentAsString.contains("<title>Swagger UI</title>")
+  }
+
   @Unroll
   def "should redirect GET #requestUrl to /swagger-ui/index.html"(String requestUrl) {
     when:
