@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HealthController {
 
   @GetMapping("/alive")
-  public ResponseEntity<String> isAlive() {
+  public ResponseEntity<Void> isAlive() {
     return ResponseEntity.ok().build();
   }
 
   @GetMapping("/ready")
-  public ResponseEntity<String> isReady() {
+  public ResponseEntity<Void> isReady() {
     return ResponseEntity.ok().build();
   }
 }
