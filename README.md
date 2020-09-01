@@ -9,6 +9,7 @@ Provides the frontpage of the public part of the Ardalo Digital Platform.
 * Spring MockMvc
 * Spock
 * Thymeleaf
+* Prometheus Metrics
 
 ## Quick Start
 
