@@ -30,3 +30,19 @@ Provides the frontpage of the public part of the Ardalo Digital Platform.
     ```bash
     ./gradlew clean build
     ```
+* Build Docker Image using `docker`
+    ```bash
+    docker build -t ardalo-digital-platform/frontpage-service .
+    ```
+* Start Docker Container using `docker`
+    ```bash
+    docker run -e "SPRING_PROFILES_ACTIVE=dev" -p 8081:8081 -t ardalo-digital-platform/frontpage-service
+    ```
+* Build Docker Image using `docker-compose`
+    ```bash
+    docker-compose build
+    ```
+* Start Docker Container using `docker-compose`
+    ```bash
+    docker-compose up
+    ```
