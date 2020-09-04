@@ -36,7 +36,7 @@ Provides the frontpage of the public part of the Ardalo Digital Platform.
     ```
 * Start Docker Container using `docker`
     ```bash
-    docker run -e "SPRING_PROFILES_ACTIVE=dev" -p 8081:8081 -t ardalo-digital-platform/frontpage-service
+    docker run -e "SPRING_PROFILES_ACTIVE=local" -p 8081:8081 -t ardalo-digital-platform/frontpage-service
     ```
 * Build Docker Image using `docker-compose`
     ```bash
