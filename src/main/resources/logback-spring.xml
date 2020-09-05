@@ -11,11 +11,14 @@
   <springProfile name="prod">
     <appender name="CONSOLE_JSON" class="ch.qos.logback.core.ConsoleAppender">
       <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+        <!-- Providers see https://github.com/logstash/logstash-logback-encoder#providers-for-loggingevents -->
         <providers>
           <timestamp>
-            <fieldName>ts</fieldName>
             <timeZone>UTC</timeZone>
           </timestamp>
+          <message>
+            <fieldName>msg</fieldName>
+          </message>
           <loggerName>
             <fieldName>logger</fieldName>
           </loggerName>
@@ -28,19 +31,13 @@
             <fileFieldName>file</fileFieldName>
             <lineFieldName>line</lineFieldName>
           </callerData>
-          <threadName>
-            <fieldName>thread</fieldName>
-          </threadName>
+          <stackTrace>
+            <fieldName>stack</fieldName>
+          </stackTrace>
           <mdc />
           <arguments>
             <includeNonStructuredArguments>false</includeNonStructuredArguments>
           </arguments>
-          <stackTrace>
-            <fieldName>stack</fieldName>
-          </stackTrace>
-          <message>
-            <fieldName>msg</fieldName>
-          </message>
         </providers>
       </encoder>
     </appender>
