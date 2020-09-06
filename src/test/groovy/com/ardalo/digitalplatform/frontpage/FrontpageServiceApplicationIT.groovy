@@ -11,10 +11,7 @@ import org.springframework.context.ApplicationContext
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 
-@SpringBootTest(
-  webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-  properties = "spring.profiles.active=prod"
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FrontpageServiceApplicationIT extends Specification {
 
   @LocalServerPort
@@ -31,10 +28,10 @@ class FrontpageServiceApplicationIT extends Specification {
     applicationContext != null
   }
 
-  def "should write application logs in JSON format for profile=prod"() {
+  def "should write application logs in JSON format"() {
     when:
     LoggerFactory.getLogger("test-logger").warn("test message")
-    def logMessage = outputCapture.toString().trim()
+    def logMessage = getLastLineFromOutputCapture()
 
     then:
     logMessage.startsWith('{')
@@ -59,13 +56,13 @@ class FrontpageServiceApplicationIT extends Specification {
     logMessage.contains('"duration":')
     logMessage.contains('"bytesSent":null')
     logMessage.contains('"userAgent":"Java/')
-    logMessage.contains('"correlationId":"-"')
+    logMessage.matches(/.+"correlationId":"[a-z0-9]{32}".+/)
     logMessage.contains('"remoteIp":')
     logMessage.contains('"user":null')
     logMessage.endsWith('}')
   }
 
-  def "should contain correlation id in access logs when X-Correlation-ID request header is provided"() {
+  def "should write correlation id from X-Correlation-ID request header to access logs"() {
     when:
     def logMessage = getAccessLogFor("/alive", new RestTemplateBuilder().defaultHeader("X-Correlation-ID", "test-correlation-id-header").build())
 
@@ -75,7 +72,11 @@ class FrontpageServiceApplicationIT extends Specification {
 
   private getAccessLogFor(String requestPath, RestTemplate restTemplate) {
     restTemplate.getForEntity("http://localhost:" + port + requestPath, String.class)
+    return getLastLineFromOutputCapture()
+  }
+
+  private getLastLineFromOutputCapture() {
     def logMessage = outputCapture.toString().trim()
-    return logMessage.substring(logMessage.lastIndexOf("\n")).trim()
+    return logMessage.substring(logMessage.contains("\n") ? logMessage.lastIndexOf("\n") : 0).trim()
   }
 }

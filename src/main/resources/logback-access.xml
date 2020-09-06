@@ -13,12 +13,12 @@
             "protocol": "%protocol",
             "method": "%requestMethod",
             "path": "%requestURI",
-            "query": "%queryString",
+            "query": "#nullNA{%queryString}",
             "status": "#asLong{%statusCode}",
             "duration": "#asLong{%elapsedTime}",
             "bytesSent": "#asLong{%bytesSent}",
             "userAgent": "%header{User-Agent}",
-            "correlationId": "%header{X-Correlation-ID}",
+            "correlationId": "%responseHeader{X-Correlation-ID}",
             "remoteIp": "%remoteIP",
             "user": "#nullNA{%user}"
             }
@@ -27,5 +27,5 @@
       </providers>
     </encoder>
   </appender>
-  <appender-ref ref="CONSOLE_JSON" />
+  <appender-ref ref="CONSOLE_JSON"/>
 </configuration>
