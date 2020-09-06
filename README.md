@@ -1,7 +1,7 @@
 # Ardalo Digital Platform Frontpage Service
 Provides the frontpage of the public part of the Ardalo Digital Platform.
 
-## Tech Stack
+## Tech Info
 
 * Java 11
 * Gradle
@@ -11,6 +11,7 @@ Provides the frontpage of the public part of the Ardalo Digital Platform.
 * Thymeleaf
 * Prometheus Metrics
 * Swagger UI
+* Access and Application Logs in JSON format
 
 ## Quick Start
 
