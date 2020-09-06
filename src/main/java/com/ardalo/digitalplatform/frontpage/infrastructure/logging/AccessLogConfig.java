@@ -16,6 +16,7 @@ public class AccessLogConfig {
     TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
     LogbackValve logbackValve = new LogbackValve();
     logbackValve.setFilename(LogbackValve.DEFAULT_FILENAME);
+    logbackValve.setQuiet(true);
     tomcat.addContextValves(logbackValve);
     return tomcat;
   }
