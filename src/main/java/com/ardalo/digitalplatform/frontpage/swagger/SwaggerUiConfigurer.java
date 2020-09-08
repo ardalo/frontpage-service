@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class SwaggerUiWebMvcConfigurer implements WebMvcConfigurer {
+public class SwaggerUiConfigurer implements WebMvcConfigurer {
 
   private static final String SWAGGER_UI_NORMALIZED_PATH = "/swagger-ui/index.html";
 
