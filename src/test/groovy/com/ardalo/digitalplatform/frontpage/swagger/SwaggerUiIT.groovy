@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import spock.lang.Specification
-import spock.lang.Unroll
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,17 +23,13 @@ class SwaggerUiIT extends Specification {
     result.response.contentAsString.contains("<title>Swagger UI</title>")
   }
 
-  @Unroll
-  def "should redirect GET #requestUrl to /swagger-ui/index.html"(String requestUrl) {
+  def "should redirect GET / to /swagger-ui/index.html"() {
     when:
-    def result = mockMvc.perform(MockMvcRequestBuilders.get(requestUrl)).andReturn()
+    def result = mockMvc.perform(MockMvcRequestBuilders.get("/")).andReturn()
 
     then:
     result.response.status == 302
     result.response.getHeader('Location') == "/swagger-ui/index.html"
     result.response.contentAsString == ""
-
-    where:
-    requestUrl << [ "/", "/swagger-ui", "/swagger-ui/" ]
   }
 }
