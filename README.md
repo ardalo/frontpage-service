@@ -1,4 +1,6 @@
 # Ardalo Digital Platform Frontpage Service
+![Build Status](https://github.com/ardalo/frontpage-service/workflows/Build/badge.svg)
+
 Provides the frontpage of the public part of the Ardalo Digital Platform.
 
 ## Tech Info
