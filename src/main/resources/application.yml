@@ -13,3 +13,7 @@ management:
     enabled-by-default: false
     web.exposure.include: prometheus
     web.path-mapping.prometheus: prometheus-metrics
+
+ardalo-platform:
+  platform-gateway:
+    base-url: http://platform-gateway:8080/api
