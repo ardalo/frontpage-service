@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -38,8 +39,13 @@ public class PlatformRoutesUpdater {
         .contentType(MediaType.APPLICATION_JSON)
         .bodyValue(platformRoute.getDefinition())
         .exchange()
-        .doOnSuccess(response -> logger.info("Updated route at Platform Gateway, routeId={}", platformRoute.getId()))
-        .doOnError(e -> logger.error("Unable to update route at Platform Gateway, routeId={}: {}", platformRoute.getId(), e.getMessage()))
+        .doOnNext(response -> {
+          if (!HttpStatus.OK.equals(response.statusCode())) {
+            throw new RuntimeException("Request failed with status code " + response.rawStatusCode());
+          }
+        })
+        .doOnSuccess(response -> logger.info("Updated route at Platform Gateway (routeId={})", platformRoute.getId()))
+        .doOnError(e -> logger.error("Unable to update route at Platform Gateway (routeId={}): {}", platformRoute.getId(), e.getMessage()))
         .retryWhen(Retry.fixedDelay(Integer.MAX_VALUE, Duration.ofMinutes(1)))
         .subscribe()
       );
