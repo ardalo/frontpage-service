@@ -17,3 +17,6 @@ management:
 ardalo-platform:
   platform-gateway:
     base-url: http://platform-gateway:8080/api
+    platform-routes:
+      - id: frontpage
+        definition: '{"uri":"http://frontpage-service:8081/api/pages/frontpage","predicates":[{"name":"Path","args":{"arg0":"/"}}]}'

@@ -1,6 +1,7 @@
 package com.ardalo.digitalplatform.frontpage.ardaloplatform;
 
 import java.time.Duration;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +17,31 @@ public class PlatformRoutesUpdater {
 
   private static final Logger logger = LoggerFactory.getLogger(PlatformRoutesUpdater.class);
 
+  private final List<ArdaloPlatformConfig.PlatformRoute> platformRoutes;
   private final WebClient webClient;
 
   @Autowired
   public PlatformRoutesUpdater(ArdaloPlatformConfig ardaloPlatformConfig) {
+    this.platformRoutes = ardaloPlatformConfig.getPlatformGateway().getPlatformRoutes();
     this.webClient = WebClient.builder()
-      .baseUrl(ardaloPlatformConfig.getPlatformGatewayBaseUrl())
+      .baseUrl(ardaloPlatformConfig.getPlatformGateway().getBaseUrl())
       .build();
   }
 
   @EventListener(ApplicationReadyEvent.class)
   public void updatePlatformRoutes() {
-    this.webClient
-      .post()
-      .uri("/routes/v1/frontpage")
-      .contentType(MediaType.APPLICATION_JSON)
-      .bodyValue("{\"uri\":\"http://frontpage-service:8081/api/pages/frontpage\",\"predicates\":[{\"name\":\"Path\",\"args\":{\"arg0\":\"/\"}}]}")
-      .exchange()
-      .doOnSuccess(response -> logger.info("Updated routes at Platform Gateway"))
-      .doOnError(e -> logger.error("Unable to update routes at Platform Gateway: {}", e.getMessage()))
-      .retryWhen(Retry.fixedDelay(Integer.MAX_VALUE, Duration.ofMinutes(1)))
-      .block();
+    this.platformRoutes
+      .parallelStream()
+      .forEach(platformRoute -> this.webClient
+        .post()
+        .uri("/routes/v1/{routeId}}", platformRoute.getId())
+        .contentType(MediaType.APPLICATION_JSON)
+        .bodyValue(platformRoute.getDefinition())
+        .exchange()
+        .doOnSuccess(response -> logger.info("Updated route at Platform Gateway, routeId={}", platformRoute.getId()))
+        .doOnError(e -> logger.error("Unable to update route at Platform Gateway, routeId={}: {}", platformRoute.getId(), e.getMessage()))
+        .retryWhen(Retry.fixedDelay(Integer.MAX_VALUE, Duration.ofMinutes(1)))
+        .subscribe()
+      );
   }
 }
