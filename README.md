@@ -24,7 +24,7 @@ __Java Spring Boot Service__
     ```
 * Run tests
     ```bash
-    $ ./gradlew clean test
+    $ ./gradlew test
     ```
 * Generate Code Coverage Report. HTML Report can be found in `./build/reports/jacoco/test/html`
     ```bash
