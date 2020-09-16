@@ -4,7 +4,7 @@
 Provides the frontpage of the public part of the Ardalo Digital Platform.
 
 ## Tech Info
-
+__Java Spring Boot Service__
 * Java 11
 * Gradle
 * Spring Boot
@@ -18,7 +18,6 @@ Provides the frontpage of the public part of the Ardalo Digital Platform.
 * Docker
 
 ## Quick Start
-
 * Start application
     ```bash
     $ ./gradlew bootRun
