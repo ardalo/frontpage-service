@@ -16,7 +16,7 @@ import reactor.util.retry.Retry;
 @Component
 public class PlatformRoutesUpdater {
 
-  private static final Logger logger = LoggerFactory.getLogger(PlatformRoutesUpdater.class);
+  private final Logger logger = LoggerFactory.getLogger(getClass());
 
   private final List<ArdaloPlatformConfig.PlatformRoute> platformRoutes;
   private final WebClient webClient;
