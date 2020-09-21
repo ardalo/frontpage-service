@@ -17,7 +17,6 @@ import reactor.util.retry.Retry;
 public class PlatformRoutesUpdater {
 
   private final Logger logger = LoggerFactory.getLogger(getClass());
-
   private final List<ArdaloPlatformConfig.PlatformRoute> platformRoutes;
   private final WebClient webClient;
 
@@ -35,7 +34,7 @@ public class PlatformRoutesUpdater {
       .parallelStream()
       .forEach(platformRoute -> this.webClient
         .post()
-        .uri("/routes/v1/{routeId}}", platformRoute.getId())
+        .uri("/routes/v1/{routeId}", platformRoute.getId())
         .contentType(MediaType.APPLICATION_JSON)
         .bodyValue(platformRoute.getDefinition())
         .exchange()
