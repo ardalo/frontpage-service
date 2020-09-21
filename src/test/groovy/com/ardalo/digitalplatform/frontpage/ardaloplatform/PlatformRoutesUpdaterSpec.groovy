@@ -1,6 +1,7 @@
 package com.ardalo.digitalplatform.frontpage.ardaloplatform
 
 import okhttp3.mockwebserver.MockWebServer
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
@@ -8,6 +9,7 @@ import spock.lang.Specification
 
 import java.util.concurrent.TimeUnit
 
+@SpringBootTest
 class PlatformRoutesUpdaterSpec extends Specification {
 
   private MockWebServer mockWebServer
