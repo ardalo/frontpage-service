@@ -39,7 +39,7 @@ public class PlatformRoutesUpdater {
         .bodyValue(platformRoute.getDefinition())
         .exchange()
         .doOnNext(response -> {
-          if (!HttpStatus.OK.equals(response.statusCode())) {
+          if (!HttpStatus.CREATED.equals(response.statusCode())) {
             throw new RuntimeException("Request failed with status code " + response.rawStatusCode());
           }
         })
