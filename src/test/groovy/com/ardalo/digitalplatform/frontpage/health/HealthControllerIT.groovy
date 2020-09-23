@@ -14,7 +14,7 @@ class HealthControllerIT extends Specification {
   @Autowired
   MockMvc mockMvc
 
-  def "should return 200 OK for GET /alive"() {
+  def "should return 200 OK for alive endpoint"() {
     when:
     def result = mockMvc.perform(MockMvcRequestBuilders.get("/alive")).andReturn()
 
@@ -23,7 +23,7 @@ class HealthControllerIT extends Specification {
     result.response.contentAsString == ""
   }
 
-  def "should return 200 OK for GET /ready"() {
+  def "should return 200 OK for ready endpoint"() {
     when:
     def result = mockMvc.perform(MockMvcRequestBuilders.get("/ready")).andReturn()
 

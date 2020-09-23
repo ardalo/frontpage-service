@@ -3,6 +3,7 @@ package com.ardalo.digitalplatform.frontpage.swagger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import spock.lang.Specification
@@ -31,5 +32,25 @@ class SwaggerUiIT extends Specification {
     result.response.status == 302
     result.response.getHeader('Location') == "/swagger-ui/index.html"
     result.response.contentAsString == ""
+  }
+
+  def "should provide OpenAPI v3 API doc"() {
+    when:
+    def result = mockMvc.perform(MockMvcRequestBuilders.get("/v3/api-docs")).andReturn()
+
+    then:
+    result.response.status == 200
+    result.response.contentType == MediaType.APPLICATION_JSON.toString()
+    result.response.contentAsString.contains('"openapi":"3.0.3"')
+  }
+
+  def "should provide Swagger v2 API doc"() {
+    when:
+    def result = mockMvc.perform(MockMvcRequestBuilders.get("/v2/api-docs")).andReturn()
+
+    then:
+    result.response.status == 200
+    result.response.contentType == MediaType.APPLICATION_JSON.toString()
+    result.response.contentAsString.contains('"swagger":"2.0"')
   }
 }
