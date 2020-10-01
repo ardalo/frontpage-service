@@ -25,9 +25,15 @@ class LoggingIT extends Specification {
 
     then:
     logMessage.startsWith('{')
+    logMessage.contains('"@timestamp":"')
+    logMessage.contains('"type":"application"')
     logMessage.contains('"msg":"test message"')
     logMessage.contains('"logger":"test-logger"')
     logMessage.contains('"level":"WARN"')
+    logMessage.contains('"class":"com.ardalo.digitalplatform.frontpage.logging.LoggingIT"')
+    logMessage.contains('"method":"')
+    logMessage.contains('"file":"LoggingIT.groovy"')
+    logMessage.contains('"line":')
     logMessage.endsWith('}')
   }
 
