@@ -44,6 +44,7 @@ class LoggingIT extends Specification {
     then:
     logMessage.startsWith('{')
     logMessage.contains('"@timestamp":')
+    logMessage.contains('"type":"access"')
     logMessage.contains('"protocol":"HTTP/1.1"')
     logMessage.contains('"method":"GET"')
     logMessage.contains('"path":"/alive"')
