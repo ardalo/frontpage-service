@@ -4,6 +4,7 @@
     <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
       <providers>
         <pattern>
+          <omitEmptyFields>true</omitEmptyFields>
           <!-- Encoder Details see https://github.com/logstash/logstash-logback-encoder#accessevent-patterns -->
           <!-- Pattern see http://logback.qos.ch/xref/ch/qos/logback/access/PatternLayout.html -->
           <pattern>
@@ -17,7 +18,7 @@
             "status": "#asLong{%statusCode}",
             "duration": "#asLong{%elapsedTime}",
             "bytesSent": "#asLong{%bytesSent}",
-            "userAgent": "%header{User-Agent}",
+            "userAgent": "#nullNA{%header{User-Agent}}",
             "correlationId": "%responseHeader{X-Correlation-ID}",
             "remoteIp": "%remoteIP",
             "user": "#nullNA{%user}"
