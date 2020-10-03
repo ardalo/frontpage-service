@@ -25,6 +25,12 @@ sonarqube {
   }
 }
 
+jacocoTestReport {
+  reports {
+    xml.enabled true
+  }
+}
+
 dependencies {
   implementation "ch.qos.logback:logback-access:1.2.3"
   implementation "io.micrometer:micrometer-registry-prometheus:1.5.4"
