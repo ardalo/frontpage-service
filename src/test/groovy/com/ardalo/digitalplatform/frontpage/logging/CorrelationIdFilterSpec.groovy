@@ -23,4 +23,19 @@ class CorrelationIdFilterSpec extends Specification {
     1* response.addHeader("X-Correlation-ID", "test-correlation-id-foo_bar")
     1* filterChain.doFilter(request, response)
   }
+
+  def "should generate correlation id if none is provided"() {
+    given:
+    def request = Mock(HttpServletRequest)
+    def response = Mock(HttpServletResponse)
+    def filterChain = Mock(FilterChain)
+    request.getHeader("X-Correlation-ID") >> null
+
+    when:
+    new CorrelationIdFilter().doFilter(request, response, filterChain)
+
+    then:
+    1* response.addHeader("X-Correlation-ID", { it.matches(/^[a-z0-9]+$/) })
+    1* filterChain.doFilter(request, response)
+  }
 }
