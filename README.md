@@ -1,5 +1,7 @@
 # Ardalo Digital Platform Frontpage Service
 ![Build Status](https://github.com/ardalo/frontpage-service/workflows/Build/badge.svg)
+[![Code Coverage](https://sonarcloud.io/api/project_badges/measure?project=ardalo_frontpage-service&metric=coverage)](https://sonarcloud.io/dashboard?id=ardalo_frontpage-service)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ardalo_frontpage-service&metric=ncloc)](https://sonarcloud.io/dashboard?id=ardalo_frontpage-service)
 
 Provides the frontpage of the public part of the Ardalo Digital Platform.
 
