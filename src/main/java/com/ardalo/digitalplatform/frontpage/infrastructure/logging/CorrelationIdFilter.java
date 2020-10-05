@@ -1,6 +1,7 @@
 package com.ardalo.digitalplatform.frontpage.infrastructure.logging;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -34,9 +35,8 @@ public class CorrelationIdFilter implements Filter {
   }
 
   private String getCorrelationId(HttpServletRequest request) {
-    String correlationId = request.getHeader(CORRELATION_ID_HEADER);
-    return (correlationId == null)
-      ? UUID.randomUUID().toString().replace("-", "")
-      : correlationId.replaceAll("[^a-zA-Z0-9-_.]", "");
+    return Optional.ofNullable(request.getHeader(CORRELATION_ID_HEADER))
+      .map(correlationId -> correlationId.replaceAll("[^a-zA-Z0-9-_.]", ""))
+      .orElse(UUID.randomUUID().toString().replace("-", ""));
   }
 }
