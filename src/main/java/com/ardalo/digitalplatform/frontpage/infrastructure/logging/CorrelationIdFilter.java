@@ -35,6 +35,8 @@ public class CorrelationIdFilter implements Filter {
 
   private String getCorrelationId(HttpServletRequest request) {
     String correlationId = request.getHeader(CORRELATION_ID_HEADER);
-    return (correlationId == null) ? UUID.randomUUID().toString().replaceAll("-", "") : correlationId;
+    return (correlationId == null)
+      ? UUID.randomUUID().toString().replace("-", "")
+      : correlationId.replaceAll("[^a-zA-Z0-9-_.]", "");
   }
 }
