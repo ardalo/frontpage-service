@@ -41,7 +41,8 @@ class LoggingIT extends Specification {
 
   def "should write access logs in JSON format"() {
     when:
-    def logMessage = getAccessLogFor("/alive?foo=bar", new RestTemplate())
+    new RestTemplate().getForEntity("http://localhost:" + port + "/alive?foo=bar", String.class)
+    def logMessage = getLastLineFromOutputCapture()
 
     then:
     logMessage.startsWith('{')
@@ -63,15 +64,14 @@ class LoggingIT extends Specification {
 
   def "should write correlation id from X-Correlation-ID request header to access logs"() {
     when:
-    def logMessage = getAccessLogFor("/alive", new RestTemplateBuilder().defaultHeader("X-Correlation-ID", "test-correlation-id-header").build())
+    new RestTemplateBuilder()
+      .defaultHeader("X-Correlation-ID", "test-correlation-id-header")
+      .build()
+      .getForEntity("http://localhost:" + port + "/alive", String.class)
+    def logMessage = getLastLineFromOutputCapture()
 
     then:
     logMessage.contains('"correlationId":"test-correlation-id-header"')
-  }
-
-  private getAccessLogFor(String requestPath, RestTemplate restTemplate) {
-    restTemplate.getForEntity("http://localhost:" + port + requestPath, String.class)
-    return getLastLineFromOutputCapture()
   }
 
   private getLastLineFromOutputCapture() {
