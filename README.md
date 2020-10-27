@@ -26,7 +26,7 @@ __Java Spring Boot Service__
   ```console
   $ docker-compose build && docker-compose up
   ```
-* Start application
+* Start application and find API docs at `http://localhost:8081/`
   ```console
   $ ./gradlew bootRun
   ```
@@ -37,10 +37,6 @@ __Java Spring Boot Service__
 * Generate Code Coverage Report. HTML Report can be found in `./build/reports/jacoco/test/html`
   ```console
   $ ./gradlew check jacocoTestReport
-  ```
-* Build application JAR (and run tests)
-  ```console
-  $ ./gradlew build
   ```
 
 ## API Documentation
