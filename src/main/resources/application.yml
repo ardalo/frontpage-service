@@ -14,7 +14,11 @@ management:
     web.exposure.include: prometheus
     web.path-mapping.prometheus: prometheus-metrics
 
-springfox.documentation.swagger-ui.base-url: /apidoc
+springfox:
+  documentation:
+    swagger-ui.baseUrl: /apidoc
+    open-api.v3.path: /apidoc/v3
+    swagger.v2.path: /apidoc/v2
 
 ardalo-platform:
   platform-gateway:

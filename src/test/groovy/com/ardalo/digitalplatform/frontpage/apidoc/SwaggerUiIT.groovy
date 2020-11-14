@@ -26,17 +26,20 @@ class SwaggerUiIT extends Specification {
 
   def "should redirect GET /apidoc to /apidoc/swagger-ui/index.html"() {
     when:
-    def result = mockMvc.perform(MockMvcRequestBuilders.get("/apidoc")).andReturn()
+    def result = mockMvc.perform(MockMvcRequestBuilders.get(requestPath)).andReturn()
 
     then:
     result.response.status == 302
     result.response.getHeader('Location') == "/apidoc/swagger-ui/index.html"
     result.response.contentAsString == ""
+
+    where:
+    requestPath << ["/apidoc", "/apidoc/"]
   }
 
   def "should provide OpenAPI v3 API doc"() {
     when:
-    def result = mockMvc.perform(MockMvcRequestBuilders.get("/v3/api-docs")).andReturn()
+    def result = mockMvc.perform(MockMvcRequestBuilders.get("/apidoc/v3")).andReturn()
 
     then:
     result.response.status == 200
@@ -46,7 +49,7 @@ class SwaggerUiIT extends Specification {
 
   def "should provide Swagger v2 API doc"() {
     when:
-    def result = mockMvc.perform(MockMvcRequestBuilders.get("/v2/api-docs")).andReturn()
+    def result = mockMvc.perform(MockMvcRequestBuilders.get("/apidoc/v2")).andReturn()
 
     then:
     result.response.status == 200
