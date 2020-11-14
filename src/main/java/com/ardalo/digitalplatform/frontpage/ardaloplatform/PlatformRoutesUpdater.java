@@ -37,10 +37,11 @@ public class PlatformRoutesUpdater {
         .uri("/routes/v1/{routeId}", platformRoute.getId())
         .contentType(MediaType.APPLICATION_JSON)
         .bodyValue(platformRoute.getDefinition())
-        .exchange()
+        .retrieve()
+        .toBodilessEntity()
         .doOnNext(response -> {
-          if (!HttpStatus.CREATED.equals(response.statusCode())) {
-            throw new RuntimeException("Request failed with status code " + response.rawStatusCode());
+          if (!HttpStatus.CREATED.equals(response.getStatusCode())) {
+            throw new RuntimeException("Request failed with status code " + response.getStatusCodeValue());
           }
         })
         .doOnSuccess(response -> logger.info("Updated route at Platform Gateway (routeId={})", platformRoute.getId()))
