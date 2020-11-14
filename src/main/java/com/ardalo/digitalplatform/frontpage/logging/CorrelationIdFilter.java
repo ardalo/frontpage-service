@@ -1,4 +1,4 @@
-package com.ardalo.digitalplatform.frontpage.infrastructure.logging;
+package com.ardalo.digitalplatform.frontpage.logging;
 
 import java.io.IOException;
 import java.util.Optional;

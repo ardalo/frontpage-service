@@ -1,6 +1,5 @@
 package com.ardalo.digitalplatform.frontpage.logging
 
-import com.ardalo.digitalplatform.frontpage.infrastructure.logging.CorrelationIdFilter
 import spock.lang.Specification
 
 import javax.servlet.FilterChain

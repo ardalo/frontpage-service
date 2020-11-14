@@ -1,4 +1,4 @@
-package com.ardalo.digitalplatform.frontpage.infrastructure.logging;
+package com.ardalo.digitalplatform.frontpage.logging;
 
 import ch.qos.logback.access.tomcat.LogbackValve;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
