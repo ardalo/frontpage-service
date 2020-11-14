@@ -1,6 +1,7 @@
 package com.ardalo.digitalplatform.frontpage.metrics
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
@@ -10,6 +11,7 @@ import spock.lang.Specification
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureMetrics
 class PrometheusMetricsIT extends Specification {
 
   @Autowired

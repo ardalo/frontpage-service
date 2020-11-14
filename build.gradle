@@ -4,7 +4,7 @@ plugins {
   id "jacoco"
   id "java"
   id "org.sonarqube" version "3.0"
-  id "org.springframework.boot" version "2.3.4.RELEASE"
+  id "org.springframework.boot" version "2.4.0"
 }
 
 java {
@@ -34,7 +34,7 @@ jacocoTestReport {
 
 dependencies {
   implementation "ch.qos.logback:logback-access:1.2.3"
-  implementation "io.micrometer:micrometer-registry-prometheus:1.5.5"
+  implementation "io.micrometer:micrometer-registry-prometheus:1.6.1"
   implementation "io.springfox:springfox-boot-starter:3.0.0"
   implementation "net.logstash.logback:logstash-logback-encoder:6.4"
   implementation "org.springframework.boot:spring-boot-starter-actuator"
