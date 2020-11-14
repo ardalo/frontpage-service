@@ -40,5 +40,5 @@ __Java Spring Boot Service__
   ```
 
 ## API Documentation
-The OpenAPI documentation (Swagger UI) can be found at the root path of the service (e.g. `http://localhost:8081/`).
+Swagger UI is accessible via `/apidoc` (e.g. http://localhost:8081/apidoc).
 It provides an overview of all endpoints.

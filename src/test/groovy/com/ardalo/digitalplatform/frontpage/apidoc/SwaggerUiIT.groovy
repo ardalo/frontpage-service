@@ -1,4 +1,4 @@
-package com.ardalo.digitalplatform.frontpage.swagger
+package com.ardalo.digitalplatform.frontpage.apidoc
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -17,20 +17,20 @@ class SwaggerUiIT extends Specification {
 
   def "should provide Swagger UI"() {
     when:
-    def result = mockMvc.perform(MockMvcRequestBuilders.get("/swagger-ui/index.html")).andReturn()
+    def result = mockMvc.perform(MockMvcRequestBuilders.get("/apidoc/swagger-ui/index.html")).andReturn()
 
     then:
     result.response.status == 200
     result.response.contentAsString.contains("<title>Swagger UI</title>")
   }
 
-  def "should redirect GET / to /swagger-ui/index.html"() {
+  def "should redirect GET /apidoc to /apidoc/swagger-ui/index.html"() {
     when:
-    def result = mockMvc.perform(MockMvcRequestBuilders.get("/")).andReturn()
+    def result = mockMvc.perform(MockMvcRequestBuilders.get("/apidoc")).andReturn()
 
     then:
     result.response.status == 302
-    result.response.getHeader('Location') == "/swagger-ui/index.html"
+    result.response.getHeader('Location') == "/apidoc/swagger-ui/index.html"
     result.response.contentAsString == ""
   }
 

@@ -1,4 +1,4 @@
-package com.ardalo.digitalplatform.frontpage.swagger;
+package com.ardalo.digitalplatform.frontpage.apidoc;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -9,6 +9,6 @@ public class SwaggerUiWebMvcConfigurer implements WebMvcConfigurer {
 
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addRedirectViewController("/", "/swagger-ui/index.html");
+    registry.addRedirectViewController("/apidoc", "/apidoc/swagger-ui/index.html");
   }
 }
