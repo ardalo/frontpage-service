@@ -56,22 +56,22 @@ class LoggingIT extends Specification {
     logMessage.contains('"duration":')
     !logMessage.contains('"bytesSent":')
     logMessage.contains('"userAgent":"Java/')
-    logMessage.matches(/.+"correlationId":"[a-z0-9]{32}".+/)
+    logMessage.matches(/.+"requestId":"[a-z0-9]{32}".+/)
     logMessage.contains('"remoteIp":')
     !logMessage.contains('"user":')
     logMessage.endsWith('}')
   }
 
-  def "should write correlation id from X-Correlation-ID request header to access logs"() {
+  def "should write request id from X-Request-ID request header to access logs"() {
     when:
     new RestTemplateBuilder()
-      .defaultHeader("X-Correlation-ID", "test-correlation-id-header")
+      .defaultHeader("X-Request-ID", "test-request-id-header")
       .build()
       .getForEntity("http://localhost:" + port + "/alive", String.class)
     def logMessage = getLastLineFromOutputCapture()
 
     then:
-    logMessage.contains('"correlationId":"test-correlation-id-header"')
+    logMessage.contains('"requestId":"test-request-id-header"')
   }
 
   private getLastLineFromOutputCapture() {

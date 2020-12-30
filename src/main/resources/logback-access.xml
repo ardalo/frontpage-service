@@ -19,7 +19,7 @@
             "duration": "#asLong{%elapsedTime}",
             "bytesSent": "#asLong{%bytesSent}",
             "userAgent": "#nullNA{%header{User-Agent}}",
-            "correlationId": "%responseHeader{X-Correlation-ID}",
+            "requestId": "%responseHeader{X-Request-ID}",
             "remoteIp": "%remoteIP",
             "user": "#nullNA{%user}"
             }

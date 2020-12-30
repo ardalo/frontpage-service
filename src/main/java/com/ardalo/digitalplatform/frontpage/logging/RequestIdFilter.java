@@ -14,10 +14,10 @@ import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CorrelationIdFilter implements Filter {
+public class RequestIdFilter implements Filter {
 
-  private static final String CORRELATION_ID_HEADER = "X-Correlation-ID";
-  private static final String CORRELATION_ID_MDC_FIELD_NAME = "correlationId";
+  private static final String REQUEST_ID_HEADER = "X-Request-ID";
+  private static final String REQUEST_ID_MDC_FIELD_NAME = "requestId";
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -25,18 +25,18 @@ public class CorrelationIdFilter implements Filter {
     HttpServletResponse httpResponse = (HttpServletResponse) response;
 
     try {
-      String correlationId = getCorrelationId(httpRequest);
-      httpResponse.addHeader(CORRELATION_ID_HEADER, correlationId);
-      MDC.put(CORRELATION_ID_MDC_FIELD_NAME, correlationId);
+      String requestId = getRequestId(httpRequest);
+      httpResponse.addHeader(REQUEST_ID_HEADER, requestId);
+      MDC.put(REQUEST_ID_MDC_FIELD_NAME, requestId);
       chain.doFilter(request, response);
     } finally {
-      MDC.remove(CORRELATION_ID_MDC_FIELD_NAME);
+      MDC.remove(REQUEST_ID_MDC_FIELD_NAME);
     }
   }
 
-  private String getCorrelationId(HttpServletRequest request) {
-    return Optional.ofNullable(request.getHeader(CORRELATION_ID_HEADER))
-      .map(correlationId -> correlationId.replaceAll("[^a-zA-Z0-9-_.]", ""))
+  private String getRequestId(HttpServletRequest request) {
+    return Optional.ofNullable(request.getHeader(REQUEST_ID_HEADER))
+      .map(requestId -> requestId.replaceAll("[^a-zA-Z0-9-_.]", ""))
       .orElse(UUID.randomUUID().toString().replace("-", ""));
   }
 }
