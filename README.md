@@ -38,6 +38,10 @@ __Java Spring Boot Service__
   ```console
   $ ./gradlew check jacocoTestReport
   ```
+* Check for outdated dependencies via [Gradle Versions Plugin](https://github.com/ben-manes/gradle-versions-plugin)
+  ```console
+  $ ./gradlew dependencyUpdates -Drevision=release
+  ```
 
 ## API Documentation
 Swagger UI is accessible via `/apidoc` (e.g. http://localhost:8081/apidoc).
