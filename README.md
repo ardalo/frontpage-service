@@ -7,14 +7,11 @@ Provides the frontpage of the public part of the Ardalo Digital Platform.
 
 ## Tech Info
 __Java Spring Boot Service__
-* Java 11
 * Gradle
-* Spring Boot
-* Spring MockMvc
-* Spock
-* Thymeleaf
-* Prometheus Metrics
-* Swagger UI
+* Template Engine: Thymeleaf
+* Testing: Spock, Spring MockMvc
+* Metrics: Prometheus
+* API Documentation: Swagger UI
 * Access and Application Logs in JSON format
 * JaCoCo Code Coverage Report
 * Static Code Analysis via SonarCloud
