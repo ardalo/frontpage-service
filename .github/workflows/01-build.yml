@@ -45,7 +45,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-      - name: Build Docker image and push to Docker Hub for main branch
+      - name: Build Docker image and push to Docker Hub for master branch
         if: (github.event_name == 'push') && (github.ref == 'refs/heads/master')
         uses: docker/build-push-action@v2
         with:
@@ -54,7 +54,7 @@ jobs:
           tags: ardalo/frontpage-service:${{ github.sha }},ardalo/frontpage-service:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      - name: Build Docker image and push to Docker Hub for non-main branch
+      - name: Build Docker image and push to Docker Hub for non-master branch
         if: (github.event_name == 'push') && (github.ref != 'refs/heads/master')
         uses: docker/build-push-action@v2
         with:
