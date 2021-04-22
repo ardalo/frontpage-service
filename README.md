@@ -19,11 +19,11 @@ __Java Spring Boot Service__
 * CI/CD: GitHub Actions
 
 ## Quick Start
-* Run via Docker using `docker compose` and find API docs at `http://localhost:8081/apidoc`
+* Run via Docker using `docker compose` and find API docs at http://localhost:8081/apidoc
   ```console
   $ docker compose build && docker compose up
   ```
-* Start application and find API docs at `http://localhost:8081/apidoc`
+* Start application and find API docs at http://localhost:8081/apidoc
   ```console
   $ ./gradlew bootRun
   ```
@@ -41,5 +41,4 @@ __Java Spring Boot Service__
   ```
 
 ## API Documentation
-Swagger UI is accessible via `/apidoc` (e.g. http://localhost:8081/apidoc).
-It provides an overview of all endpoints.
+Swagger UI is accessible via `/apidoc`
