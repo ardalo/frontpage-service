@@ -8,7 +8,6 @@ plugins {
 }
 
 java {
-  group = 'com.ardalo.digitalplatform'
   sourceCompatibility = JavaVersion.VERSION_16
   targetCompatibility = JavaVersion.VERSION_16
 }
