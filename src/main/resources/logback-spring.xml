@@ -19,7 +19,7 @@
               "level": "%level",
               "file": "%file",
               "line": "#asLong{%line}",
-              "stacktrace": "#nullNA{%exception}"
+              "stacktrace": "%exception"
               }
             </pattern>
           </pattern>
